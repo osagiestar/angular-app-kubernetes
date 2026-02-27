@@ -1,4 +1,4 @@
-#Stage
+# Stage 1
 
 # Use an existing base image
 FROM ubuntu:latest
@@ -16,3 +16,15 @@ RUN apt-get update && apt-get install -y \
 
 # Set the default command to execute when the container starts
 CMD ["python3", "app.py"]
+
+#stage 2
+FROM node:latest AS node
+WORKDIR /app
+
+# Copy application files from host to container
+COPY . .
+RUN npm install
+
+# stage 3
+FROM nginx:latest
+COPY --from=node /app /usr/share/nginx/html
