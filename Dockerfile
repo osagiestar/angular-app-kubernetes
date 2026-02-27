@@ -20,9 +20,11 @@ CMD ["python3", "app.py"]
 #stage 2
 FROM node:latest AS node
 WORKDIR /app
+
+# Copy application files from host to container
 COPY . .
 RUN npm install
 
-# stage 2
+# stage 3
 FROM nginx:latest
 COPY --from=node /app /usr/share/nginx/html
