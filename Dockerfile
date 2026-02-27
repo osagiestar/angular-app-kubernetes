@@ -25,4 +25,4 @@ RUN npm install
 
 # stage 2
 FROM nginx:latest
-COPY --from=node /app/dist/angular-app /usr/share/nginx/html
+COPY --from=node /app /usr/share/nginx/html
